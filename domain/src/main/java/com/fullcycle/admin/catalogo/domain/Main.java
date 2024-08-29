@@ -1,4 +1,4 @@
-package com.fullcycle.admin.catalogo;
+package com.fullcycle.admin.catalogo.domain;
 
 public class Main {
     public static void main(String[] args) {
