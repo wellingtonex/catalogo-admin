@@ -9,8 +9,16 @@ public interface ValidationHandler {
     ValidationHandler validate(Validation validation);
 
 
-    default boolean hasErrors(Validation validation, String message) {
+    default boolean hasError() {
         return getErrors() != null && !getErrors().isEmpty();
+    }
+
+    default Error firstError() {
+        if (getErrors() != null && !getErrors().isEmpty()) {
+            return getErrors().get(0);
+        } else {
+            return null;
+        }
     }
 
     List<Error> getErrors();

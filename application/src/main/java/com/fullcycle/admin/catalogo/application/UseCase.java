@@ -1,9 +1,7 @@
 package com.fullcycle.admin.catalogo.application;
 
 
-public class UseCase {
+public abstract class UseCase<IN, OUT> {
 
-//    public Category execute() {
-//        return new Category();
-//    }
+    public abstract OUT execute(IN command);
 }
