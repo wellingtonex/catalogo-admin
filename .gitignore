@@ -40,3 +40,4 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/infrastructure/property(org.gradle.api.file.Directory, fixed(class org.gradle.api.internal.file.DefaultFilePropertyFactory$FixedDirectory, /home/wellington/developer/fullcycle/codeflix/catalogo-admin/build))/libs/application.jar
