@@ -1,12 +1,13 @@
 package com.fullcycle.admin.catalogo.infrastructure.category;
 
 
+import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.infrastructure.MySQLGatewayTest;
 import com.fullcycle.admin.catalogo.infrastructure.category.repository.CategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @MySQLGatewayTest
@@ -19,10 +20,36 @@ public class CategoryMySQLGatewayTest {
     private CategoryRepository categoryRepository;
 
     @Test
-    public void testInjectedDependencies() {
-        assertNotNull(categoryGateway);
-        assertNotNull(categoryRepository);
-    }
+   public void givenValidCategory_whenCallsCreate_shouldReturnNewCategory() {
+        final var expectedName = "Filmes";
+        final var expectedDescription = "A categoria mais assistida";
+        final var expectedIsActive = true;
+
+        final var category = Category.newCategory(expectedName, expectedDescription, expectedIsActive);
+        assertEquals(0, categoryRepository.count());
+
+        final var actualCategory = categoryGateway.create(category);
+
+        assertEquals(expectedName, actualCategory.getName());
+        assertEquals(expectedDescription, actualCategory.getDescription());
+        assertEquals(category.getId(), actualCategory.getId());
+        assertEquals(category.isActive(), actualCategory.isActive());
+        assertEquals(category.getCreatedAt(), actualCategory.getCreatedAt());
+        assertEquals(category.getUpdatedAt(), actualCategory.getUpdatedAt());
+        assertNull(actualCategory.getDeletedAt());
+
+        final var savedCategoryOptional = categoryRepository.findById(category.getId().getValue());
+        assertTrue(savedCategoryOptional.isPresent());
+        final var savedCategory = savedCategoryOptional.get();
+        assertEquals(1, categoryRepository.count());
+        assertEquals(expectedName, savedCategory.getName());
+        assertEquals(expectedDescription, savedCategory.getDescription());
+        assertEquals(category.getId().getValue(), savedCategory.getId());
+        assertEquals(category.isActive(), savedCategory.isActive());
+        assertEquals(category.getCreatedAt(), savedCategory.getCreatedAt());
+        assertEquals(category.getUpdatedAt(), savedCategory.getUpdatedAt());
+        assertNull(savedCategory.getDeletedAt());
+   }
 
 //    @Test
 //    public void givenAValidCategory_whenCallsCreate_shouldReturnANewCategory() {
