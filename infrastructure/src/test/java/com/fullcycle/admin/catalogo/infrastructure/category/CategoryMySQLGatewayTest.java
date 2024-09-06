@@ -3,6 +3,7 @@ package com.fullcycle.admin.catalogo.infrastructure.category;
 
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.infrastructure.MySQLGatewayTest;
+import com.fullcycle.admin.catalogo.infrastructure.category.persistence.CategoryJpaEntity;
 import com.fullcycle.admin.catalogo.infrastructure.category.repository.CategoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class CategoryMySQLGatewayTest {
     private CategoryRepository categoryRepository;
 
     @Test
-   public void givenValidCategory_whenCallsCreate_shouldReturnNewCategory() {
+    public void givenValidCategory_whenCallsCreate_shouldReturnNewCategory() {
         final var expectedName = "Filmes";
         final var expectedDescription = "A categoria mais assistida";
         final var expectedIsActive = true;
@@ -49,8 +50,51 @@ public class CategoryMySQLGatewayTest {
         assertEquals(category.getCreatedAt(), savedCategory.getCreatedAt());
         assertEquals(category.getUpdatedAt(), savedCategory.getUpdatedAt());
         assertNull(savedCategory.getDeletedAt());
-   }
+    }
 
+    @Test
+    public void givenValidCategory_whenCallsUpdate_shouldReturnNewCategoryUpdated() {
+        final var expectedName = "Filmes";
+        final var expectedDescription = "A categoria mais assistida";
+        final var expectedIsActive = true;
+
+        final var category = Category.newCategory("Film", null, expectedIsActive);
+        assertEquals(0, categoryRepository.count());
+
+        categoryRepository.save(CategoryJpaEntity.from(category));
+        assertEquals(1, categoryRepository.count());
+        final var actualInvalidCategory = categoryRepository.findById(category.getId().getValue()).get();
+        assertEquals(category.getName(), actualInvalidCategory.getName());
+        assertEquals(category.getDescription(), actualInvalidCategory.getDescription());
+        assertEquals(category.getId().getValue(), actualInvalidCategory.getId());
+        assertEquals(category.isActive(), actualInvalidCategory.isActive());
+        assertEquals(category.getCreatedAt(), actualInvalidCategory.getCreatedAt());
+        assertEquals(category.getUpdatedAt(), actualInvalidCategory.getUpdatedAt());
+        assertNull(actualInvalidCategory.getDeletedAt());
+
+        final var updatedCategory = category.clone().update(expectedName, expectedDescription);
+        final var actualCategory = categoryGateway.update(updatedCategory);
+
+        assertEquals(expectedName, actualCategory.getName());
+        assertEquals(expectedDescription, actualCategory.getDescription());
+        assertEquals(category.getId(), actualCategory.getId());
+        assertEquals(category.isActive(), actualCategory.isActive());
+        assertEquals(category.getCreatedAt(), actualCategory.getCreatedAt());
+        assertTrue(category.getUpdatedAt().isBefore(actualCategory.getUpdatedAt()));
+        assertNull(actualCategory.getDeletedAt());
+
+        final var savedCategoryOptional = categoryRepository.findById(category.getId().getValue());
+        assertTrue(savedCategoryOptional.isPresent());
+        final var savedCategory = savedCategoryOptional.get();
+        assertEquals(1, categoryRepository.count());
+        assertEquals(expectedName, savedCategory.getName());
+        assertEquals(expectedDescription, savedCategory.getDescription());
+        assertEquals(category.getId().getValue(), savedCategory.getId());
+        assertEquals(category.isActive(), savedCategory.isActive());
+        assertEquals(category.getCreatedAt(), savedCategory.getCreatedAt());
+        assertTrue(category.getUpdatedAt().isBefore(savedCategory.getUpdatedAt()));
+        assertNull(savedCategory.getDeletedAt());
+    }
 //    @Test
 //    public void givenAValidCategory_whenCallsCreate_shouldReturnANewCategory() {
 //        final var expectedName = "Filmes";

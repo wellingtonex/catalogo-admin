@@ -22,7 +22,7 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
     @Override
     public Category create(Category category) {
-        return categoryRepository.save(CategoryJpaEntity.from(category)).toAggregate();
+        return save(category);
     }
 
     @Override
@@ -37,7 +37,11 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
     @Override
     public Category update(Category category) {
-        return null;
+        return save(category);
+    }
+
+    private Category save(Category category) {
+        return categoryRepository.save(CategoryJpaEntity.from(category)).toAggregate();
     }
 
     @Override
