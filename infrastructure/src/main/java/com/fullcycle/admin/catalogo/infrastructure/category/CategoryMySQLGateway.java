@@ -26,12 +26,15 @@ public class CategoryMySQLGateway implements CategoryGateway {
     }
 
     @Override
-    public void deleteById(CategoryID id) {
-
+    public void deleteById(final CategoryID id) {
+        final String idValue = id.getValue();
+        if (categoryRepository.existsById(idValue)) {
+            categoryRepository.deleteById(id.getValue());
+        }
     }
 
     @Override
-    public Optional<Category> findById(CategoryID id) {
+    public Optional<Category> findById(final CategoryID id) {
         return Optional.empty();
     }
 
