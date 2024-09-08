@@ -170,7 +170,7 @@ public class UpdateCategoryUseCaseTest {
                         expectedIsActive);
 
 
-        final var expectedErrorMessage ="Category with id %s was not found.".formatted(expectedId);
+        final var expectedErrorMessage ="Category with ID %s was not found.".formatted(expectedId);
         final var expectedErrorCount = 1;
 
         when(categoryGateway.findById(eq(CategoryID.from(expectedId))))
