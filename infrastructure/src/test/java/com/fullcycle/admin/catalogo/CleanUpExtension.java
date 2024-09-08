@@ -1,4 +1,4 @@
-package com.fullcycle.admin.catalogo.infrastructure;
+package com.fullcycle.admin.catalogo;
 
 import com.fullcycle.admin.catalogo.infrastructure.category.repository.CategoryRepository;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -9,7 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Collection;
 import java.util.List;
 
-public class MySQLCleanUpExtension implements BeforeEachCallback {
+public class CleanUpExtension implements BeforeEachCallback {
 
     @Override
     public void beforeEach(final ExtensionContext context) {

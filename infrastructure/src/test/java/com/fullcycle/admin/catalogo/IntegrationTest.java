@@ -1,8 +1,10 @@
-package com.fullcycle.admin.catalogo.infrastructure;
+package com.fullcycle.admin.catalogo;
 
+import com.fullcycle.admin.catalogo.infrastructure.configuration.WebServerConfig;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.test.context.ActiveProfiles;
@@ -13,15 +15,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @ActiveProfiles("test-integration")
-@ComponentScan(
-        basePackages = "com.fullcycle.admin.catalogo",
-        useDefaultFilters = false,
-        includeFilters = {
-                @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*MySQLGateway")
-        }
-)
-@DataJpaTest
-@ExtendWith(MySQLCleanUpExtension.class)
+@SpringBootTest(classes = WebServerConfig.class)
+@ExtendWith(CleanUpExtension.class)
 @Tag("integrationTest")
-public @interface MySQLGatewayTest {
+public @interface IntegrationTest {
 }
