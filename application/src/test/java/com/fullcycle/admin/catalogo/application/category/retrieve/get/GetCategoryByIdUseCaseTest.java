@@ -61,7 +61,7 @@ public class GetCategoryByIdUseCaseTest {
 
     @Test
     public void givenAInvalidId_whenCallsGetCategory_shouldReturnNotFound() {
-        final var expectedErrorMessage = "Category with id 123 was not found.";
+        final var expectedErrorMessage = "Category with ID 123 was not found";
         final var expectedId = CategoryID.from("123");
 
         when(categoryGateway.findById(eq(expectedId)))

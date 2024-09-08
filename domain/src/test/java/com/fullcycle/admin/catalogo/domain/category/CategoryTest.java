@@ -209,7 +209,7 @@ class CategoryTest {
         final var createdAt = category.getCreatedAt();
         final var updatedAt = category.getUpdatedAt();
 
-        final var actualCategory =  category.update(expectedName, expectedDescription);
+        final var actualCategory =  category.update(expectedName, expectedDescription, expectedIsActive);
 
         assertDoesNotThrow(() -> category.validate(new ThrowsValidationHandler()));
 
