@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Inherited
 @ActiveProfiles("test-integration")
 @SpringBootTest(classes = WebServerConfig.class)
-@ExtendWith(CleanUpExtension.class)
+@ExtendWith(MySQLCleanUpExtension.class)
 @Tag("integrationTest")
 public @interface IntegrationTest {
 }

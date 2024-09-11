@@ -17,11 +17,11 @@ import java.lang.annotation.*;
         basePackages = "com.fullcycle.admin.catalogo",
         useDefaultFilters = false,
         includeFilters = {
-                @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".[MySQLGateway]")
+                @ComponentScan.Filter(type = FilterType.REGEX, pattern = ".*MySQLGateway")
         }
 )
 @DataJpaTest
-@ExtendWith(CleanUpExtension.class)
+@ExtendWith(MySQLCleanUpExtension.class)
 @Tag("integrationTest")
 public @interface MySQLGatewayTest {
 }
