@@ -1,6 +1,7 @@
 package com.fullcycle.admin.catalogo.infrastructure.api;
 
 import com.fullcycle.admin.catalogo.domain.Pagination;
+import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryListResponse;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryResponse;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryRequest;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.UpdateCategoryRequest;
@@ -31,14 +32,20 @@ public interface CategoryAPI {
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<?> createCategory(@RequestBody @Valid final CreateCategoryRequest input);
 
+    @GetMapping
     @Operation(summary = "List all categories paginated")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listed successfully"),
-            @ApiResponse(responseCode = "422", description = "A invalidation parameters was thrown"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown")
+            @ApiResponse(responseCode = "422", description = "A invalid parameter was received"),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
     })
-    @GetMapping
-    Pagination<?> listCategories();
+    Pagination<CategoryListResponse> listCategories(
+            @RequestParam(name = "search", required = false, defaultValue = "") final String search,
+            @RequestParam(name = "page", required = false, defaultValue = "0") final int page,
+            @RequestParam(name = "perPage", required = false, defaultValue = "10") final int perPage,
+            @RequestParam(name = "sort", required = false, defaultValue = "name") final String sort,
+            @RequestParam(name = "dir", required = false, defaultValue = "asc") final String direction
+    );
 
 
     @GetMapping(
