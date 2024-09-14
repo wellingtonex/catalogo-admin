@@ -18,8 +18,7 @@ plugins {
 
 group = 'com.fullcycle.admin.catalogo.infrastructure'
 
-mainClassName = 'com.fullcycle.admin.catalogo.infrastructure.Main'
-
+//mainClassName = 'com.fullcycle.admin.catalogo.infrastructure.Main'
 //jar {
 //    archiveFileName = 'application.jar'
 //    destinationDirectory.set(file("${rootProject.buildDir}/libs"))
