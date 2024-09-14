@@ -11,7 +11,7 @@ import com.fullcycle.admin.catalogo.application.category.retrieve.get.list.Categ
 import com.fullcycle.admin.catalogo.application.category.retrieve.get.list.ListCategoriesUseCase;
 import com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryOutput;
 import com.fullcycle.admin.catalogo.application.category.update.UpdateCategoryUseCase;
-import com.fullcycle.admin.catalogo.domain.Pagination;
+import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
 import com.fullcycle.admin.catalogo.domain.category.Category;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.exceptions.DomainException;
