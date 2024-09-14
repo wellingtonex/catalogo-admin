@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -70,13 +71,18 @@ public interface MockDsl {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(Json.writeValueAsString(body));
 
-        final var actualId = this.mvc().perform(aRequest)
+//        final var actualId = this.mvc().perform(aRequest)
+//                .andExpect(status().isCreated())
+//                .andReturn()
+//                .getResponse().getHeader("Location")
+//                .replace("%s/".formatted(url), "");
+
+        final var jsonResult = this.mvc().perform(aRequest)
                 .andExpect(status().isCreated())
                 .andReturn()
-                .getResponse().getHeader("Location")
-                .replace("%s/".formatted(url), "");
+                .getResponse().getContentAsString();
 
-        return actualId;
+        return Json.readValue(jsonResult, Map.class).get("id").toString();
     }
 
     private ResultActions givenResult(final String url, final Object body) throws Exception {
