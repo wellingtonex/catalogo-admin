@@ -13,7 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Service
 public class CategoryMySQLGateway implements CategoryGateway {
@@ -47,9 +49,6 @@ public class CategoryMySQLGateway implements CategoryGateway {
         return save(category);
     }
 
-    private Category save(Category category) {
-        return categoryRepository.save(CategoryJpaEntity.from(category)).toAggregate();
-    }
 
     @Override
     public Pagination<Category> findAll(SearchQuery query) {
@@ -69,5 +68,19 @@ public class CategoryMySQLGateway implements CategoryGateway {
                 pageResult.getTotalElements(),
                 pageResult.map(CategoryJpaEntity::toAggregate).toList()
         );
+    }
+
+    @Override
+    public List<CategoryID> existsByIds(final Iterable<CategoryID> categoryIDs) {
+        final var ids = StreamSupport.stream(categoryIDs.spliterator(), false)
+                .map(CategoryID::getValue)
+                .toList();
+        return this.categoryRepository.existsByIds(ids).stream()
+                .map(CategoryID::from)
+                .toList();
+    }
+
+    private Category save(Category category) {
+        return categoryRepository.save(CategoryJpaEntity.from(category)).toAggregate();
     }
 }
