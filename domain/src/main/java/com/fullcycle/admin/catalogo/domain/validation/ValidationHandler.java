@@ -4,10 +4,13 @@ import java.util.List;
 
 public interface ValidationHandler {
 
-    ValidationHandler append(Error error);
-    ValidationHandler append(ValidationHandler handler);
-    ValidationHandler validate(Validation validation);
+    ValidationHandler append(Error anError);
 
+    ValidationHandler append(ValidationHandler anHandler);
+
+    <T> T validate(Validation<T> aValidation);
+
+    List<Error> getErrors();
 
     default boolean hasError() {
         return getErrors() != null && !getErrors().isEmpty();
@@ -21,10 +24,7 @@ public interface ValidationHandler {
         }
     }
 
-    List<Error> getErrors();
-
-    interface Validation {
-
-        void validate();
+    interface Validation<T> {
+        T validate();
     }
 }
