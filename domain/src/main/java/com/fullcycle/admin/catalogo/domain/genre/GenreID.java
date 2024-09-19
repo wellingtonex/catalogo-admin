@@ -11,7 +11,7 @@ public class GenreID extends Identifier {
 
     private GenreID(final String value) {
         Objects.requireNonNull(value);
-        this.value = value;
+        this.value = value.trim();
     }
 
     public static GenreID unique() {
