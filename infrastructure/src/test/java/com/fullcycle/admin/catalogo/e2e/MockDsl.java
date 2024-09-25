@@ -1,8 +1,13 @@
 package com.fullcycle.admin.catalogo.e2e;
 
 import com.fullcycle.admin.catalogo.domain.Identifier;
+import com.fullcycle.admin.catalogo.domain.castmember.CastMemberID;
+import com.fullcycle.admin.catalogo.domain.castmember.CastMemberType;
 import com.fullcycle.admin.catalogo.domain.category.CategoryID;
 import com.fullcycle.admin.catalogo.domain.genre.GenreID;
+import com.fullcycle.admin.catalogo.infrastructure.castmember.models.CastMemberResponse;
+import com.fullcycle.admin.catalogo.infrastructure.castmember.models.CreateCastMemberRequest;
+import com.fullcycle.admin.catalogo.infrastructure.castmember.models.UpdateCastMemberRequest;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CategoryResponse;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.CreateCategoryRequest;
 import com.fullcycle.admin.catalogo.infrastructure.category.models.UpdateCategoryRequest;
@@ -28,44 +33,44 @@ public interface MockDsl {
     /**
      * Cast Member
      */
-//    default ResultActions deleteACastMember(final CastMemberID anId) throws Exception {
-//        return this.delete("/cast_members/", anId);
-//    }
-//
-//    default CastMemberID givenACastMember(final String aName, final CastMemberType aType) throws Exception {
-//        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
-//        final var actualId = this.given("/cast_members", aRequestBody);
-//        return CastMemberID.from(actualId);
-//    }
-//
-//    default ResultActions givenACastMemberResult(final String aName, final CastMemberType aType) throws Exception {
-//        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
-//        return this.givenResult("/cast_members", aRequestBody);
-//    }
-//
-//    default ResultActions listCastMembers(final int page, final int perPage) throws Exception {
-//        return listCastMembers(page, perPage, "", "", "");
-//    }
-//
-//    default ResultActions listCastMembers(final int page, final int perPage, final String search) throws Exception {
-//        return listCastMembers(page, perPage, search, "", "");
-//    }
-//
-//    default ResultActions listCastMembers(final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
-//        return this.list("/cast_members", page, perPage, search, sort, direction);
-//    }
-//
-//    default CastMemberResponse retrieveACastMember(final CastMemberID anId) throws Exception {
-//        return this.retrieve("/cast_members/", anId, CastMemberResponse.class);
-//    }
-//
-//    default ResultActions retrieveACastMemberResult(final CastMemberID anId) throws Exception {
-//        return this.retrieveResult("/cast_members/", anId);
-//    }
-//
-//    default ResultActions updateACastMember(final CastMemberID anId, final String aName, final CastMemberType aType) throws Exception {
-//        return this.update("/cast_members/", anId, new UpdateCastMemberRequest(aName, aType));
-//    }
+    default ResultActions deleteACastMember(final CastMemberID anId) throws Exception {
+        return this.delete("/cast_members/", anId);
+    }
+
+    default CastMemberID givenACastMember(final String aName, final CastMemberType aType) throws Exception {
+        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
+        final var actualId = this.given("/cast_members", aRequestBody);
+        return CastMemberID.from(actualId);
+    }
+
+    default ResultActions givenACastMemberResult(final String aName, final CastMemberType aType) throws Exception {
+        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
+        return this.givenResult("/cast_members", aRequestBody);
+    }
+
+    default ResultActions listCastMembers(final int page, final int perPage) throws Exception {
+        return listCastMembers(page, perPage, "", "", "");
+    }
+
+    default ResultActions listCastMembers(final int page, final int perPage, final String search) throws Exception {
+        return listCastMembers(page, perPage, search, "", "");
+    }
+
+    default ResultActions listCastMembers(final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
+        return this.list("/cast_members", page, perPage, search, sort, direction);
+    }
+
+    default CastMemberResponse retrieveACastMember(final CastMemberID anId) throws Exception {
+        return this.retrieve("/cast_members/", anId, CastMemberResponse.class);
+    }
+
+    default ResultActions retrieveACastMemberResult(final CastMemberID anId) throws Exception {
+        return this.retrieveResult("/cast_members/", anId);
+    }
+
+    default ResultActions updateACastMember(final CastMemberID anId, final String aName, final CastMemberType aType) throws Exception {
+        return this.update("/cast_members/", anId, new UpdateCastMemberRequest(aName, aType));
+    }
 
     /**
      * Category
