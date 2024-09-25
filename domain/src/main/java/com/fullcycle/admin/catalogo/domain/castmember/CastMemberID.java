@@ -19,7 +19,7 @@ public class CastMemberID extends Identifier {
     }
 
     public static CastMemberID from(final String anId) {
-        return new CastMemberID(anId);
+        return new CastMemberID(anId.trim());
     }
 
     @Override
