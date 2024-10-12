@@ -1,4 +1,4 @@
-package com.fullcycle.admin.catalogo.infrastructure;
+package com.fullcycle.admin.catalogo.infrastructure.utils;
 
 public final class SqlUtils {
 

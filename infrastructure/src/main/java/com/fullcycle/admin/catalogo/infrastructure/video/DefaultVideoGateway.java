@@ -3,7 +3,7 @@ package com.fullcycle.admin.catalogo.infrastructure.video;
 import com.fullcycle.admin.catalogo.domain.Identifier;
 import com.fullcycle.admin.catalogo.domain.pagination.Pagination;
 import com.fullcycle.admin.catalogo.domain.video.*;
-import com.fullcycle.admin.catalogo.infrastructure.SqlUtils;
+import com.fullcycle.admin.catalogo.infrastructure.utils.SqlUtils;
 import com.fullcycle.admin.catalogo.infrastructure.configuration.annotations.VideoCreatedQueue;
 import com.fullcycle.admin.catalogo.infrastructure.services.EventService;
 import com.fullcycle.admin.catalogo.infrastructure.video.persistence.VideoJpaEntity;
