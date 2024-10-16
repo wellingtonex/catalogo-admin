@@ -4,6 +4,20 @@ networks:
 
 services:
 
+  app:
+    container_name: admin_videos_app
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+      - rabbit
+    networks:
+      - adm_videos_services
+
   mysql:
     container_name: adm_videos_mysql
     image: mysql:latest

@@ -1,23 +1,9 @@
-amqp:
-  admin:
-    auto-create: true
-  host: localhost
-  port: 5672
-  username: adm_videos
-  password: 123456
-
 mysql:
-  username: root
-  password: 123456
-  schema: adm_videos
-  url: localhost:3306
+  username: ${mysql.username}
+  password: ${mysql.password}
+  schema: ${mysql.schema}
+  url: ${mysql.url}
 
-server:
-  port: 8080
-  undertow:
-    threads:
-      worker: 10
-      io: 2
 
 #spring:
 #  autoconfigure:
