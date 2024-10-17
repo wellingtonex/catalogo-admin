@@ -10,9 +10,9 @@ public class CategoryValidator extends Validator {
     public static final int NAME_MIN_LENGTH = 3;
     private final Category category;
 
-    public CategoryValidator(final Category category, final ValidationHandler validationHandler) {
-        super(validationHandler);
-        this.category = category;
+    public CategoryValidator(final Category aCategory, final ValidationHandler aHandler) {
+        super(aHandler);
+        this.category = aCategory;
     }
 
     @Override
